@@ -39,28 +39,4 @@ public class ListServlet extends HttpServlet {
 
 	}
 
-	//ソートを実行
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-//		ItemBean newItem = new ItemBean();
-//		//カテゴリーを取得
-//		newItem.setItemCategoryName(request.getParameter("itemCategoryName"));
-//		//選択済みの商品ステータスを全て取得、配列に格納
-//		String[] itemStatus = request.getParameterValues("itemStatus");
-//
-//		//選択済みの商品のステータスを切り替えるサーブレット
-//		//返却値によって切り替え0→成功、1→ボタン押して、2→失敗ページへ
-//		switch(Item.deleteItem(itemStatus)) {
-//			case 0:
-//				ItemManagementHelper.deleteItemRedirect(response, newItem, "販売ステータスを切り替えました");
-//				break;
-//			case 1:
-//				ItemManagementHelper.deleteItemRedirect(response, newItem, "商品を選択してください");
-//				break;
-//			case 2:
-//				ErrorHandling.transitionToErrorPage(request,response,"ステータスの切り替えに失敗しました","adminTopPage","管理者ページに");
-//				break;
-//		}
-	}
-
 }
