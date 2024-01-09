@@ -38,8 +38,12 @@ public class SelectBookList {
 								book.setBookKana(rs.getString("BOOK_KANA"));
 								book.setPrice(rs.getInt("PRICE"));
 								book.setIssueDate(rs.getDate("ISSUE_DATE"));
-								book.setCreateDate(rs.getTimestamp("CREATE_DATETIME"));
-								book.setUpdateDate(rs.getTimestamp("UPDATE_DATETIME"));
+								if (rs.getTimestamp("CREATE_DATETIME") != null) {
+								    book.setCreateDate(rs.getTimestamp("CREATE_DATETIME").toLocalDateTime());
+								}
+								if (rs.getTimestamp("UPDATE_DATETIME") != null) {
+								    book.setUpdateDate(rs.getTimestamp("UPDATE_DATETIME").toLocalDateTime());
+								}
 
 								bookList.add(book);
 							}

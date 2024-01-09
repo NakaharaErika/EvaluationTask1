@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.Date;
 
+import dto.BeanValidation;
 import dto.BookBean;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,6 +39,7 @@ public class EditServlet extends HttpServlet {
 		//janCdからアイテム情報を取得
 		book = SelectBook.selectBook(book);
 
+		request.setAttribute("crJanCd", janCd);
 		request.setAttribute("book", book);
 		String view = "/WEB-INF/views/edit.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
@@ -57,6 +59,13 @@ public class EditServlet extends HttpServlet {
 		newBook.setIssueDate(Date.valueOf(request.getParameter("issueDate")));
 		String crJanCd = request.getParameter("crJanCd");
 		newBook = CheckParam.checkParam(newBook, price);
+
+		if(BeanValidation.validate(request, "book", newBook)) {
+			String view = "/WEB-INF/views/edit.jsp";
+			request.setAttribute("crJanCd", crJanCd);
+			request.getRequestDispatcher(view).forward(request, response);
+			return;
+		}
 
 		String rowMessage = null;
 		switch(UpdateBook.updateBook(newBook, crJanCd)) {

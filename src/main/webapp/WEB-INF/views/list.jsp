@@ -40,7 +40,7 @@
 									    // messageがnullでない場合にのみ表示
 									    if (message != null) {
 									%>
-									        <div class="alert alert-success" role="alert">
+									        <div class="alert alert-danger" role="alert">
 									            <%= message %>
 									        </div>
 									<%
@@ -104,8 +104,11 @@
 														</td>
 														<td style="vertical-align: middle;">
 															<%
-															LocalDateTime createDateTime = book.getCreateDate().toLocalDateTime();
-															String formattedCreateDate = createDateTime.format(formatter2);
+															LocalDateTime createDateTime = book.getCreateDate();
+															String formattedCreateDate = "";
+															if (createDateTime != null) {
+															    formattedCreateDate = createDateTime.format(formatter2);
+															}
 															%>
 															<small><%=formattedCreateDate%></small>
 														</td>
@@ -113,10 +116,10 @@
 															<%
 															String formattedUpdateDate = "";
 															if (book.getUpdateDate() != null) {
-															    LocalDateTime updateDateTime = book.getUpdateDate().toLocalDateTime();
+															    LocalDateTime updateDateTime = book.getUpdateDate();
 															    formattedUpdateDate = updateDateTime.format(formatter2);
 															%>
-																	<small><%=formattedUpdateDate%></small>
+															<small><%=formattedUpdateDate%></small>
 															<% } else { %>
 															<small>-</small>
 															<% } %>
