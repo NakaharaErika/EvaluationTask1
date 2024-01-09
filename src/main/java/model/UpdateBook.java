@@ -15,13 +15,13 @@ public class UpdateBook {
 	public static int updateBook(BookBean book, String crJanCd) {
 			StringBuilder sb = new StringBuilder();
 
-				sb.append("UPDATE "									);
-				sb.append(	"BOOK " 								);
-				sb.append("SET "									);
-				sb.append(	"JAN_CD=?, ISBN_CD=?, BOOK_NM=?,"		);
-				sb.append(	"BOOK_KANA=?, PRICE=?, ISSUE_DATE=? "	);
-				sb.append("WHERE "			);
-				sb.append(	"JAN_CD= ? ;"	);
+				sb.append("UPDATE "																		);
+				sb.append(	"BOOK " 																	);
+				sb.append("SET "																		);
+				sb.append(	"JAN_CD=?, ISBN_CD=?, BOOK_NM=?,"											);
+				sb.append(	"BOOK_KANA=?, PRICE=?, ISSUE_DATE=?,UPDATE_DATETIME = CURRENT_TIMESTAMP   "	);
+				sb.append("WHERE "																		);
+				sb.append(	"JAN_CD= ? ;"																);
 
 				final String SQL = sb.toString();
 

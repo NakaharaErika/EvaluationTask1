@@ -37,8 +37,6 @@ public class SelectBook {
 								book.setBookKana(rs.getString("BOOK_KANA"));
 								book.setPrice(rs.getInt("PRICE"));
 								book.setIssueDate(rs.getDate("ISSUE_DATE"));
-								book.setCreateDate(rs.getTimestamp("CREATE_DATETIME"));
-								book.setUpdateDate(rs.getTimestamp("UPDATE_DATETIME"));
 							}
 				} catch (SQLException | ClassNotFoundException e) {
 				e.printStackTrace();

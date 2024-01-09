@@ -34,8 +34,9 @@
 							<form action="edit" method="post">
 
 								<div class="mb-3">
+								<!-- バリデーション確認のため、敢えてrequired消してます -->
 								    <label for="janCd" class="form-label">JANコード</label>
-								    <input type="text" class="form-control" id="janCd" name="janCd" maxlength="13" required value="<%= book.getJanCd() %>" >
+								    <input type="text" class="form-control" id="janCd" name="janCd" maxlength="13" value="<%= book.getJanCd() %>" >
 								    <% String janCd = (String)request.getAttribute("janCd");
 									 if (janCd != null) {
 							 	 	%>
@@ -82,8 +83,12 @@
 							 	</div>
 
 								<div class="mb-3">
+								<!-- バリデーション確認のため、敢えてrequired消してます -->
 								    <label for="price" class="form-label">金額</label>
-								    <input type="text" class="form-control" id="price" name="price" maxlength="11" required value="<%= NumberFormat.getNumberInstance().format(book.getPrice()) %>" >
+								    <%
+								    String crPrice = (String) NumberFormat.getNumberInstance().format(book.getPrice());
+								    %>
+								    <input type="text" class="form-control" id="price" name="price" maxlength="11" value="<%= crPrice.equals("-1") ? "" : crPrice %>" >
 								    <% String price = (String)request.getAttribute("price");
 									 if (price != null) {
 							 	 	%>
@@ -107,7 +112,8 @@
 
 
 							 	<br>
-							 	<input type=hidden name="crJanCd" value=<%= book.getJanCd() %>>
+							 	<% String crJanCd = (String) request.getAttribute("crJanCd"); %>
+							 	<input type=hidden name="crJanCd" value=<%= crJanCd %>>
 								<button type=submit class="btn btn-primary">更新する</button>
 							</form>
 						<% } %>
