@@ -1,3 +1,12 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const showModal = document.getElementById('modalTrigger').getAttribute('data-show-modal') === 'true';
+    if (showModal) {
+        const myModal = new bootstrap.Modal(document.getElementById('modalOptionAdd'));
+        myModal.show();
+    }
+});
+
+
 let selectedRow = null;
 function changeColor(row) {
     // 以前に選択された行があれば、クラスを削除
@@ -23,3 +32,10 @@ if (priceInput) {
         event.target.value = value;
     });
 }
+
+document.getElementById('selectAll').addEventListener('click', function() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="bookStatus"]');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = true;
+    });
+});

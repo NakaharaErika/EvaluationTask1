@@ -11,37 +11,24 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.CheckParam;
-import model.SelectBook;
+import model.InsertBook;
 import model.SendList;
-import model.UpdateBook;
 
-@WebServlet("/edit")
-public class EditServlet extends HttpServlet {
+@WebServlet("/regist")
+public class RegistBulkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public EditServlet() {
+	public RegistBulkServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		BookBean book = new BookBean();
+		BookBean newBook = new BookBean();
+		request.setAttribute("book", newBook);
 
-		//jancdを取得
-		String janCd = request.getParameter("janCd");
-		if(janCd == null) {
-			response.sendRedirect("list");
-			return;
-		}
-
-		book.setJanCd(janCd);
-		//janCdからアイテム情報を取得
-		book = SelectBook.selectBook(book);
-
-		request.setAttribute("crJanCd", janCd);
-		request.setAttribute("book", book);
-		String view = "/WEB-INF/views/edit.jsp";
+		String view = "/WEB-INF/views/regist.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 
 	}
@@ -68,15 +55,15 @@ public class EditServlet extends HttpServlet {
 		}
 
 		String message = null;
-		switch(UpdateBook.updateBook(newBook, crJanCd)) {
+		switch(InsertBook.insertBook(newBook)) {
 			case 0:
-				message = "更新に失敗しました";
+				message = "登録に失敗しました";
 				break;
 			case 1:
 				message = "重複するJANコードは登録できません";
 				break;
 			case 2:
-				String successMsg = "更新に成功しました";
+				String successMsg = "登録に成功しました";
 				String showModal = "true";
 				request.setAttribute("successMsg", successMsg);
 				request.setAttribute("showModal", showModal);
