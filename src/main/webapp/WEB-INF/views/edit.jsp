@@ -2,6 +2,10 @@
  pageEncoding="UTF-8"%>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.ArrayList,dto.BookBean"%>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.sql.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,12 +104,17 @@
 
 								<div class="mb-3">
 								    <label for="issueDate" class="form-label">発行日</label>
-								    <input type="date" class="form-control" id="issueDate" name="issueDate" maxlength="11" required value="<%= book.getIssueDate() %>" >
-								    <% String issueDate = (String)request.getAttribute("issueDate");
-									 if (issueDate != null) {
+								    <%
+								    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+								    LocalDate issueDate = book.getIssueDate();
+								    String formattedIssueDate = issueDate.format(formatter1);
+								    %>
+								    <input type="date" class="form-control" id="issueDate" name="issueDate" maxlength="11" required value="<%=formattedIssueDate%>" >
+								    <% String issuedDate = (String)request.getAttribute("issueDate");
+									 if (issuedDate != null) {
 							 	 	%>
 						              <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
-											<%= issueDate %>
+											<%= issuedDate %>
 									  </div>
 								  <% } %>
 							 	</div>

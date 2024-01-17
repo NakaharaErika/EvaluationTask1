@@ -1,7 +1,7 @@
 package dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -22,7 +22,7 @@ public class BookBean {
     @Max(value = 1000000000, message = "¥1~1,000,000,000で入力してください。")
 	private int price;
 	@NotNull(message = "日付を入力してください。")
-	private Date issueDate;
+	private LocalDate issueDate;
 	private LocalDateTime createDate;
 	private LocalDateTime updateDate;
 
@@ -69,11 +69,11 @@ public class BookBean {
 		this.price = price;
 	}
 
-	public Date getIssueDate() {
+	public LocalDate getIssueDate() {
 		return issueDate;
 	}
 
-	public void setIssueDate(Date issueDate) {
+	public void setIssueDate(LocalDate issueDate) {
 		this.issueDate = issueDate;
 	}
 

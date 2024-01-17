@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import dto.BeanValidation;
 import dto.BookBean;
@@ -55,10 +54,9 @@ public class EditServlet extends HttpServlet {
 		newBook.setIsbnCd(request.getParameter("isbnCd"));
 		newBook.setBookNm(request.getParameter("bookNm"));
 		newBook.setBookKana(request.getParameter("bookKana"));
-		String price = request.getParameter("price");
-		newBook.setIssueDate(Date.valueOf(request.getParameter("issueDate")));
+		newBook.setPrice(CheckParam.checkPrice(request.getParameter("price")));
+		newBook.setIssueDate(CheckParam.checkDate(request.getParameter("issueDate")));
 		String crJanCd = request.getParameter("crJanCd");
-		newBook = CheckParam.checkParam(newBook, price);
 
 		if(BeanValidation.validate(request, "book", newBook)) {
 			String view = "/WEB-INF/views/edit.jsp";

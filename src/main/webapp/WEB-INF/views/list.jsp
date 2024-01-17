@@ -110,9 +110,8 @@
 														</td>
 														<td style="vertical-align: middle;" class="text-nowrap">
 															<%
-															LocalDate issueDate = new java.sql.Date(book.getIssueDate().getTime()).toLocalDate();
-														    LocalDateTime issueDateTime = issueDate.atStartOfDay();
-														    String formattedIssueDate = issueDateTime.format(formatter1);
+															LocalDate issueDate = book.getIssueDate();
+														    String formattedIssueDate = issueDate.format(formatter1);
 															%>
 															<small><%=formattedIssueDate%></small>
 														</td>
@@ -188,7 +187,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!--　完了モーダル -->
 		<%
 	    String showModalString = (String) request.getAttribute("showModal");

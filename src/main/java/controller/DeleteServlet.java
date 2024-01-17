@@ -48,7 +48,7 @@ public class DeleteServlet extends HttpServlet {
 		int falseBookListLength = delBookList.size();
 
 		if(falseBookListLength > 0) {
-			message = falseBookListLength + " 件の削除に失敗しました。 \n  JANコード：" + String.join(", ", delBookList);
+			message = falseBookListLength + " 件の削除に失敗しました。 <br>  JANコード：" + String.join(", ", delBookList);
 
 		} else {
 			int trueCount = bookStatusLength - falseBookListLength;

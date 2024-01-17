@@ -2,6 +2,10 @@
  pageEncoding="UTF-8"%>
 <%@ page import="java.text.NumberFormat" %>
 <%@ page import="java.util.ArrayList,dto.BookBean"%>
+<%@ page import="java.time.LocalDate" %>
+<%@ page import="java.time.LocalDateTime" %>
+<%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="java.sql.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,13 +105,21 @@
 							 	</div>
 
 								<div class="mb-3">
+									<%
+								    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+									String formattedIssueDate = null;
+									if(book.getIssueDate() != null){
+								    LocalDate issueDate = book.getIssueDate();
+								    formattedIssueDate = issueDate.format(formatter1);
+									}
+								    %>
 								    <label for="issueDate" class="form-label">発行日</label>
-								    <input type="date" class="form-control" id="issueDate" name="issueDate" maxlength="11" required value="<%= book.getIssueDate() != null ? book.getIssueDate() : ""%>" >
-								    <% String issueDate = (String)request.getAttribute("issueDate");
-									 if (issueDate != null) {
+								    <input type="date" class="form-control" id="issueDate" name="issueDate" maxlength="11" required value="<%=formattedIssueDate != null ? formattedIssueDate : ""%>" >
+								    <% String issuedDate = (String)request.getAttribute("issueDate");
+									 if (issuedDate != null) {
 							 	 	%>
 						              <div class="d-flex flex-wrap" style="display: flex; justify-content: start; margin-bottom: 30px; color: #FF0000;">
-											<%= issueDate %>
+											<%= issuedDate %>
 									  </div>
 								  <% } %>
 							 	</div>
@@ -121,7 +133,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- モーダルウィンドウ1 -->
 		<div class="modal fade" id="registAllBook" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered w-100">
@@ -130,14 +142,12 @@
 						<small class="ms-2">一括登録</small>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
+					<form action="registBulk" method="post" enctype="multipart/form-data">
 					<div class="modal-body p-5 d-flex flex-wrap">
-						<small>
-							参照するExcelファイルを選択してください(2MB.xlmxのみ)
-						</small>
-						<form action="registBulk" method="post" enctype="multipart/form-data">
-						    <input type="file" name="file">
-						    <input type="submit" value="Upload">
-						</form>
+					    <small>
+					        参照するExcelファイルを選択してください(2MB.xlmxのみ)
+					    </small>
+					        <input type="file" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
 					</div>
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-outline-danger"
@@ -145,12 +155,14 @@
 							OK
 						</button>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
-		
+
 </main>
 <script src="./js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>
 
